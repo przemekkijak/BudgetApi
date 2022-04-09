@@ -1,6 +1,6 @@
 ﻿namespace BudgetApp.Domain.Entities
 {
-    public class UserEntity : BaseEntity
+    public class UserEntity : EntityBase
     {
         public string Name { get; set; }
 

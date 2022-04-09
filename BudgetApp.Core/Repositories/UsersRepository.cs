@@ -6,18 +6,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BudgetApp.Core.Repositories
 {
-    public class UsersRepository
+    public class UsersRepository : RepositoryBase<UserEntity>
     {
-        private readonly BudgetContext _dbContext;
-
-        public UsersRepository(BudgetContext dbContext)
+        public UsersRepository(BudgetContext dbContext) : base(dbContext, dbContext.Users)
         {
-            _dbContext = dbContext;
+
         }
 
         public async Task<IList<UserEntity>> GetAllUsers()
         {
-            return await _dbContext.Users.ToListAsync();
+            return await Table.ToListAsync();
         }
     }
 }
