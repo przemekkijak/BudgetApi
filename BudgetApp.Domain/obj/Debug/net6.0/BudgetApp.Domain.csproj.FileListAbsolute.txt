@@ -1,0 +1,12 @@
+D:\Dev\BudgetAPI\BudgetApp\BudgetApp.Domain\bin\Debug\net6.0\BudgetApp.Domain.deps.json
+D:\Dev\BudgetAPI\BudgetApp\BudgetApp.Domain\bin\Debug\net6.0\BudgetApp.Domain.dll
+D:\Dev\BudgetAPI\BudgetApp\BudgetApp.Domain\bin\Debug\net6.0\BudgetApp.Domain.pdb
+D:\Dev\BudgetAPI\BudgetApp\BudgetApp.Domain\obj\Debug\net6.0\BudgetApp.Domain.csproj.AssemblyReference.cache
+D:\Dev\BudgetAPI\BudgetApp\BudgetApp.Domain\obj\Debug\net6.0\BudgetApp.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Dev\BudgetAPI\BudgetApp\BudgetApp.Domain\obj\Debug\net6.0\BudgetApp.Domain.AssemblyInfoInputs.cache
+D:\Dev\BudgetAPI\BudgetApp\BudgetApp.Domain\obj\Debug\net6.0\BudgetApp.Domain.AssemblyInfo.cs
+D:\Dev\BudgetAPI\BudgetApp\BudgetApp.Domain\obj\Debug\net6.0\BudgetApp.Domain.csproj.CoreCompileInputs.cache
+D:\Dev\BudgetAPI\BudgetApp\BudgetApp.Domain\obj\Debug\net6.0\BudgetApp.Domain.dll
+D:\Dev\BudgetAPI\BudgetApp\BudgetApp.Domain\obj\Debug\net6.0\refint\BudgetApp.Domain.dll
+D:\Dev\BudgetAPI\BudgetApp\BudgetApp.Domain\obj\Debug\net6.0\BudgetApp.Domain.pdb
+D:\Dev\BudgetAPI\BudgetApp\BudgetApp.Domain\obj\Debug\net6.0\ref\BudgetApp.Domain.dll
