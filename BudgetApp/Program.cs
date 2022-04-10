@@ -20,9 +20,11 @@ builder.Services.AddTransient<UsersRepository>();
 
 builder.Services.AddControllers();
 
+
 var connectionString = configuration.GetConnectionString("budgetContext");
 builder.Services.AddDbContext<BudgetContext>(
-    opt => opt.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+    opt => opt.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString),
+        mysqlOptions => mysqlOptions.MigrationsAssembly("BudgetApp.Database")));
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
