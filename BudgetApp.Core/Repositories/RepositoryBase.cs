@@ -1,6 +1,4 @@
-
-
-using BudgetApp.Data.DbContext;
+using BudgetApp.Database;
 using BudgetApp.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 

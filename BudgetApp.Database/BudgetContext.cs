@@ -1,7 +1,7 @@
-﻿using BudgetApp.Domain.Entities;
+using BudgetApp.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace BudgetApp.Data.DbContext
+namespace BudgetApp.Database
 {
     public class BudgetContext : Microsoft.EntityFrameworkCore.DbContext
     {

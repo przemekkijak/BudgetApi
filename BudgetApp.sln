@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetApp.Domain", "BudgetA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetApp.Core", "BudgetApp.Core\BudgetApp.Core.csproj", "{307321D9-E6CE-464D-BB7D-6A3F824C83BB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetApp.Database", "BudgetApp.Database\BudgetApp.Database.csproj", "{1BEB7A34-E333-4A75-8338-2BC3BFE789A1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,10 @@ Global
 		{307321D9-E6CE-464D-BB7D-6A3F824C83BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{307321D9-E6CE-464D-BB7D-6A3F824C83BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{307321D9-E6CE-464D-BB7D-6A3F824C83BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BEB7A34-E333-4A75-8338-2BC3BFE789A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BEB7A34-E333-4A75-8338-2BC3BFE789A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BEB7A34-E333-4A75-8338-2BC3BFE789A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BEB7A34-E333-4A75-8338-2BC3BFE789A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection

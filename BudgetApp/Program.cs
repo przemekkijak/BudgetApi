@@ -1,5 +1,5 @@
 using BudgetApp.Core.Repositories;
-using BudgetApp.Data.DbContext;
+using BudgetApp.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
