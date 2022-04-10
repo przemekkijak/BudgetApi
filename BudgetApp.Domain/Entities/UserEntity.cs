@@ -2,7 +2,7 @@
 {
     public class UserEntity : EntityBase
     {
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
 
         public string Phone { get; set; }
     }
