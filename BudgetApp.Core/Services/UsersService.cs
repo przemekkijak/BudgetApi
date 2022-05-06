@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using BudgetApp.Core.Interfaces.Repositories;
 using BudgetApp.Core.Interfaces.Services;
-using BudgetApp.Domain.Entities;
 using BudgetApp.Domain.Models;
 
 namespace BudgetApp.Core.Services
@@ -26,6 +25,19 @@ namespace BudgetApp.Core.Services
                 Id = user.Id,
                 Name = user.Name
             };
+        }
+
+        public async Task<RegisterModel?> Register(RegisterModel model)
+        {
+            var existing = await _usersRepository.GetByPhone(model.Phone);
+            if (existing != null)
+            {
+                return null;
+            }
+
+            model.Password = BCrypt.Net.BCrypt.HashPassword(model.Password);
+            await _usersRepository.CreateAsync(model);
+            return model;
         }
     }
 }

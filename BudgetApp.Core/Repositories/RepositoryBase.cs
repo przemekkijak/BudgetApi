@@ -22,5 +22,11 @@ namespace BudgetApp.Core.Repositories
         {
             return await Table.SingleOrDefaultAsync(a => a.Id == id);
         }
+
+        public async Task CreateAsync(T entity)
+        {
+            Table.Add(entity);
+            await Context.SaveChangesAsync();
+        }
     }
 }

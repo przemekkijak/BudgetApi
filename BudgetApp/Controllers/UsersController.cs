@@ -5,7 +5,6 @@ using BudgetApp.Core.Interfaces.Repositories;
 using BudgetApp.Core.Interfaces.Services;
 using BudgetApp.Domain.Entities;
 using BudgetApp.Domain.Models;
-using BudgetApp.Helpers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BudgetApp.Controllers
@@ -16,11 +15,13 @@ namespace BudgetApp.Controllers
     {
         private readonly IUsersRepository _usersRepository;
         private readonly IAuthService _authService;
+        private readonly IUsersService _usersService;
 
-        public UsersController(IUsersRepository usersRepository, IAuthService authService)
+        public UsersController(IUsersRepository usersRepository, IAuthService authService, IUsersService usersService)
         {
             _usersRepository = usersRepository;
             _authService = authService;
+            _usersService = usersService;
         }
         
         [HttpPost("login")]
@@ -33,6 +34,13 @@ namespace BudgetApp.Controllers
             }
 
             return Ok(auth);
+        }
+
+        [HttpPost("register")]
+        public async Task<IActionResult> Login([FromBody] RegisterModel model)
+        {
+            await _usersService.Register(model);
+            return Ok();
         }
 
         [HttpGet]

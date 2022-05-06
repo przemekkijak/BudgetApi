@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using BudgetApp.Core.Interfaces.Repositories;
 using BudgetApp.Database;
@@ -20,10 +21,26 @@ namespace BudgetApp.Core.Repositories
             return await Table.ToListAsync();
         }
 
-        public async Task<UserEntity?> GetForAuth(LoginModel user)
+        public async Task<UserEntity?> GetByName(string name)
         {
-            return await Table.SingleOrDefaultAsync(a => a.Name == user.Login && a.Password == user.Password);
+            return await Table.SingleOrDefaultAsync(a => a.Name == name);
         }
-        
+
+        public async Task<UserEntity?> GetByPhone(string phone)
+        {
+            return await Table.SingleOrDefaultAsync(a => a.Phone == phone);
+        }
+
+        public async Task CreateAsync(RegisterModel model)
+        {
+            await base.CreateAsync(new UserEntity()
+            {
+                Name = model.Login,
+                Password = model.Password,
+                Phone = model.Phone,
+                CreateDate = DateTime.Now,
+                UpdateDate = DateTime.Now
+            });
+        }
     }
 }

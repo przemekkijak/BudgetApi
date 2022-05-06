@@ -26,11 +26,10 @@ namespace BudgetApp.Core.Services
 
         public async Task<AuthResponse?> Authenticate(LoginModel model)
         {
-            var user = await _usersRepository.GetForAuth(model);
-            if (user == null)
+            var user = await _usersRepository.GetByName(model.Login);
+            if (user == null || !BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
                 return null;
 
-            // authentication successful so generate jwt token
             var token = GenerateToken(user);
 
             return new AuthResponse()
@@ -43,13 +42,12 @@ namespace BudgetApp.Core.Services
 
         private string GenerateToken(UserEntity user)
         {
-            // generate token that is valid for 7 days
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id.ToString()) }),
-                Expires = DateTime.UtcNow.AddDays(7),
+                Expires = DateTime.UtcNow.AddDays(2),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);

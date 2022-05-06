@@ -8,7 +8,9 @@ namespace BudgetApp.Core.Interfaces.Repositories
     public interface IUsersRepository : IRepositoryBase<UserEntity>
     {
         Task<IList<UserEntity>> GetAllUsers();
-        Task<UserEntity?> GetForAuth(LoginModel user);
+        Task<UserEntity?> GetByName(string user);
+        Task<UserEntity?> GetByPhone(string phone);
+        Task CreateAsync(RegisterModel model);
 
     }
 }
