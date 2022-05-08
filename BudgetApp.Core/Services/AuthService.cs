@@ -3,11 +3,10 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using BudgetApp.Core.Interfaces.Repositories;
-using BudgetApp.Core.Interfaces.Services;
+using BudgetApp.Domain;
 using BudgetApp.Domain.Entities;
+using BudgetApp.Domain.Interfaces;
 using BudgetApp.Domain.Models;
-using BudgetApp.Helpers;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 

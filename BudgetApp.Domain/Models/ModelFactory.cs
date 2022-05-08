@@ -13,5 +13,16 @@ namespace BudgetApp.Domain.Models
                 Phone = entity.Phone
             };
         }
+
+        public static BudgetModel Create(BudgetEntity entity)
+        {
+            return new BudgetModel()
+            {
+                Name = entity.Name,
+                UserId = entity.UserId,
+                CreateDate = entity.CreateDate,
+                UpdateDate = entity.UpdateDate
+            };
+        }
     }
 }

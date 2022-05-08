@@ -1,8 +1,7 @@
 using System;
 using System.Threading.Tasks;
-using BudgetApp.Core.Interfaces.Repositories;
-using BudgetApp.Core.Interfaces.Services;
 using BudgetApp.Domain;
+using BudgetApp.Domain.Interfaces;
 using BudgetApp.Domain.Models;
 
 namespace BudgetApp.Core.Services

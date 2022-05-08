@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using BudgetApp.AuthMiddleware;
-using BudgetApp.Core.Interfaces.Repositories;
-using BudgetApp.Core.Interfaces.Services;
 using BudgetApp.Domain;
 using BudgetApp.Domain.Entities;
+using BudgetApp.Domain.Interfaces;
 using BudgetApp.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,7 +11,7 @@ namespace BudgetApp.Controllers
 {
     [ApiController]
     [Route("api/users")]
-    public class UsersController : ControllerBase
+    public class UsersController : ApiControllerBase
     {
         private readonly IUsersRepository _usersRepository;
         private readonly IAuthService _authService;
@@ -26,15 +25,16 @@ namespace BudgetApp.Controllers
         }
         
         [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginModel data)
+        public async Task<ExecutionResult<AuthResponse>> Login(LoginModel data)
         {
             var auth = await _authService.Authenticate(data);
             if (auth == null)
             {
-                return BadRequest(new { message = "Username or password is incorrect" });
+                return new ExecutionResult<AuthResponse>(new ErrorInfo(ErrorCodes.LoginError,
+                    "Login or password is incorrect"));
             }
 
-            return Ok(auth);
+            return new ExecutionResult<AuthResponse>(auth);
         }
 
         [HttpPost("register")]

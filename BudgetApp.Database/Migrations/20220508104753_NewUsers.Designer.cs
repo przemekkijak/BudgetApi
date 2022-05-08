@@ -3,6 +3,7 @@ using System;
 using BudgetApp.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BudgetApp.Database.Migrations
 {
     [DbContext(typeof(BudgetContext))]
-    partial class BudgetContextModelSnapshot : ModelSnapshot
+    [Migration("20220508104753_NewUsers")]
+    partial class NewUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,9 +31,6 @@ namespace BudgetApp.Database.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("create_date");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("varchar(255)");
-
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime(6)")
                         .HasColumnName("update_date");
@@ -42,8 +41,7 @@ namespace BudgetApp.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId", "Name")
-                        .IsUnique();
+                    b.HasIndex("UserId");
 
                     b.ToTable("Budgets");
                 });

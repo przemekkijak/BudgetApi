@@ -1,4 +1,4 @@
-namespace BudgetApp.Helpers
+namespace BudgetApp.Domain
 {
     public class AppSettings
     {

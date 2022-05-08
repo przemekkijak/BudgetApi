@@ -1,10 +1,11 @@
+#nullable enable
 using System.Threading.Tasks;
 
-namespace BudgetApp.Core.Interfaces.Repositories
+namespace BudgetApp.Domain.Interfaces
 {
     public interface IRepositoryBase<T>
     {
         Task<T?> GetById(int id);
-        Task CreateAsync(T entity);
+        Task<T> CreateAsync(T entity);
     }
 }

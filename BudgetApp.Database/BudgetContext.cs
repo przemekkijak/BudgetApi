@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BudgetApp.Database
 {
-    public class BudgetContext : Microsoft.EntityFrameworkCore.DbContext
+    public class BudgetContext : DbContext
     {
         public BudgetContext(DbContextOptions<BudgetContext> options) : base(options)
         {
@@ -18,7 +18,7 @@ namespace BudgetApp.Database
             modelBuilder.Entity<BudgetEntity>()
                 .HasMany(a => a.Transactions)
                 .WithOne(a => a.Budget);
-            modelBuilder.Entity<BudgetEntity>().HasIndex(a => a.UserId);
+            modelBuilder.Entity<BudgetEntity>().HasIndex(a => new { a.UserId, a.Name }).IsUnique();
 
             modelBuilder.Entity<TransactionEntity>().HasIndex(a => a.BudgetId);
         }

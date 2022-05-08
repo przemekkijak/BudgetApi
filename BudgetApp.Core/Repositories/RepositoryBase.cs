@@ -1,20 +1,19 @@
 using System.Threading.Tasks;
-using BudgetApp.Core.Interfaces.Repositories;
 using BudgetApp.Database;
 using BudgetApp.Domain.Entities;
+using BudgetApp.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace BudgetApp.Core.Repositories
 {
     public abstract class RepositoryBase<T> : IRepositoryBase<T> where T: EntityBase
     {
-        protected readonly BudgetContext Context;
+        private readonly BudgetContext _context;
         protected readonly DbSet<T> Table;
-        //TODO mappingservice
 
         protected RepositoryBase(BudgetContext context, DbSet<T> table)
         {
-            Context = context; //TODO throw if null
+            _context = context; //TODO throw if null
             Table = table;
         }
 
@@ -23,10 +22,11 @@ namespace BudgetApp.Core.Repositories
             return await Table.SingleOrDefaultAsync(a => a.Id == id);
         }
 
-        public async Task CreateAsync(T entity)
+        public async Task<T> CreateAsync(T entity)
         {
             Table.Add(entity);
-            await Context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
+            return entity;
         }
     }
 }

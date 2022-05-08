@@ -1,16 +1,16 @@
-using System.Threading.Tasks;
+using System.Collections.Generic;
 using BudgetApp.AuthMiddleware;
-using BudgetApp.Core.Interfaces.Repositories;
-using BudgetApp.Core.Interfaces.Services;
 using BudgetApp.Core.Repositories;
 using BudgetApp.Core.Services;
 using BudgetApp.Database;
-using BudgetApp.Helpers;
+using BudgetApp.Domain;
+using BudgetApp.Domain.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,7 +35,34 @@ builder.Services.AddDbContext<BudgetContext>(
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo() { Title = "BudgetApi", Version = "v1"});
+    
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "Example: \"Authorization: Bearer {token}\"",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new List<string>()
+        }
+    });
+});
 
 var app = builder.Build();
 
@@ -63,6 +90,7 @@ void AddServices(WebApplicationBuilder builder)
     #region Repositories
 
     builder.Services.AddScoped<IUsersRepository, UsersRepository>();
+    builder.Services.AddScoped<IBudgetRepository, BudgetRepository>();
 
     #endregion
 
@@ -70,6 +98,8 @@ void AddServices(WebApplicationBuilder builder)
 
     builder.Services.AddScoped<IUsersService, UsersService>();
     builder.Services.AddScoped<IAuthService, AuthService>();
+    builder.Services.AddScoped<IBudgetService, BudgetService>();
 
     #endregion
+
 }

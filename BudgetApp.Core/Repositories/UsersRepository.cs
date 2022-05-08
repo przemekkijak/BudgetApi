@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using BudgetApp.Core.Interfaces.Repositories;
 using BudgetApp.Database;
 using BudgetApp.Domain;
 using BudgetApp.Domain.Entities;
+using BudgetApp.Domain.Interfaces;
 using BudgetApp.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
