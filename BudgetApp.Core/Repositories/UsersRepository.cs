@@ -21,9 +21,9 @@ namespace BudgetApp.Core.Repositories
             return await Table.ToListAsync();
         }
 
-        public async Task<UserEntity?> GetByName(string name)
+        public async Task<UserEntity?> GetByEmail(string email)
         {
-            return await Table.SingleOrDefaultAsync(a => a.Name == name);
+            return await Table.SingleOrDefaultAsync(a => a.Email == email);
         }
 
         public async Task<UserEntity?> GetByPhone(string phone)
@@ -35,7 +35,7 @@ namespace BudgetApp.Core.Repositories
         {
             await base.CreateAsync(new UserEntity()
             {
-                Name = model.Login,
+                Email = model.Email,
                 Password = model.Password,
                 Phone = model.Phone,
                 CreateDate = DateTime.Now,

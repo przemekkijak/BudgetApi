@@ -23,14 +23,21 @@ namespace BudgetApp.Core.Services
             return new UserModel()
             {
                 Id = user.Id,
-                Name = user.Name
+                Email = user.Email,
+                Phone = user.Phone
             };
         }
 
         public async Task<RegisterModel?> Register(RegisterModel model)
         {
-            var existing = await _usersRepository.GetByPhone(model.Phone);
-            if (existing != null)
+            var existingMail = await _usersRepository.GetByEmail(model.Email);
+            if (existingMail != null)
+            {
+                return null;
+            }
+
+            var existingPhone = await _usersRepository.GetByPhone(model.Phone);
+            if (existingPhone != null)
             {
                 return null;
             }

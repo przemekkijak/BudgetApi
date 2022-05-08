@@ -26,7 +26,7 @@ namespace BudgetApp.Core.Services
 
         public async Task<AuthResponse?> Authenticate(LoginModel model)
         {
-            var user = await _usersRepository.GetByName(model.Login);
+            var user = await _usersRepository.GetByEmail(model.Login);
             if (user == null || !BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
                 return null;
 
@@ -34,7 +34,7 @@ namespace BudgetApp.Core.Services
 
             return new AuthResponse()
             {
-                Name = user.Name,
+                Email = user.Email,
                 UserId = user.Id,
                 Token = token
             };
