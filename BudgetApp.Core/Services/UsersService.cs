@@ -56,11 +56,12 @@ namespace BudgetApp.Core.Services
             await _usersRepository.CreateAsync(model);
 
             var createdUser = await _usersRepository.GetByEmail(model.Email);
-            return new ExecutionResult<UserModel?>(new UserModel()
+            if (createdUser != null)
             {
-                Email = createdUser?.Email,
-                Phone = createdUser?.Phone
-            });
+                return new ExecutionResult<UserModel?>(ModelFactory.Create(createdUser));
+            }
+
+            return new ExecutionResult<UserModel?>(new ErrorInfo(ErrorCodes.RegisterError, "Couldn't create user"));
         }
     }
 }

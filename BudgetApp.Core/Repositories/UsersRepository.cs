@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using BudgetApp.Core.Interfaces.Repositories;
 using BudgetApp.Database;
+using BudgetApp.Domain;
 using BudgetApp.Domain.Entities;
 using BudgetApp.Domain.Models;
 using Microsoft.EntityFrameworkCore;
@@ -38,8 +39,8 @@ namespace BudgetApp.Core.Repositories
                 Email = model.Email,
                 Password = model.Password,
                 Phone = model.Phone,
-                CreateDate = DateTime.Now,
-                UpdateDate = DateTime.Now
+                CreateDate = TimeService.Now,
+                UpdateDate = TimeService.Now
             });
         }
     }
