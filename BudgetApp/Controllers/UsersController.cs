@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using BudgetApp.AuthMiddleware;
 using BudgetApp.Core.Interfaces.Repositories;
 using BudgetApp.Core.Interfaces.Services;
+using BudgetApp.Domain;
 using BudgetApp.Domain.Entities;
 using BudgetApp.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -37,10 +38,9 @@ namespace BudgetApp.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Login([FromBody] RegisterModel model)
+        public async Task<ExecutionResult<UserModel?>> Login([FromBody] RegisterModel model)
         {
-            await _usersService.Register(model);
-            return Ok();
+            return await _usersService.Register(model);
         }
 
         [HttpGet]

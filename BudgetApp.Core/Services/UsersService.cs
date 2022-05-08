@@ -1,6 +1,8 @@
+using System;
 using System.Threading.Tasks;
 using BudgetApp.Core.Interfaces.Repositories;
 using BudgetApp.Core.Interfaces.Services;
+using BudgetApp.Domain;
 using BudgetApp.Domain.Models;
 
 namespace BudgetApp.Core.Services
@@ -28,23 +30,37 @@ namespace BudgetApp.Core.Services
             };
         }
 
-        public async Task<RegisterModel?> Register(RegisterModel model)
+        public async Task<ExecutionResult<UserModel?>> Register(RegisterModel model)
         {
             var existingMail = await _usersRepository.GetByEmail(model.Email);
             if (existingMail != null)
             {
-                return null;
+                return new ExecutionResult<UserModel?>(new ErrorInfo(ErrorCodes.RegisterError,
+                    "Email is already taken"));
             }
 
             var existingPhone = await _usersRepository.GetByPhone(model.Phone);
             if (existingPhone != null)
             {
-                return null;
+                return new ExecutionResult<UserModel?>(new ErrorInfo(ErrorCodes.RegisterError,
+                    "Phone is already taken"));            
+            }
+
+            if (model.Password.Length <= 4)
+            {
+                return new ExecutionResult<UserModel?>(new ErrorInfo(ErrorCodes.RegisterError,
+                    "Password must be at least 5 characters long"));
             }
 
             model.Password = BCrypt.Net.BCrypt.HashPassword(model.Password);
             await _usersRepository.CreateAsync(model);
-            return model;
+
+            var createdUser = await _usersRepository.GetByEmail(model.Email);
+            return new ExecutionResult<UserModel?>(new UserModel()
+            {
+                Email = createdUser?.Email,
+                Phone = createdUser?.Phone
+            });
         }
     }
 }
