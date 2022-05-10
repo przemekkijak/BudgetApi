@@ -18,10 +18,12 @@ namespace BudgetApp.Domain.Models
         {
             return new BudgetModel()
             {
+                Id = entity.Id,
                 Name = entity.Name,
                 UserId = entity.UserId,
                 CreateDate = entity.CreateDate,
-                UpdateDate = entity.UpdateDate
+                UpdateDate = entity.UpdateDate,
+                IsDefault = entity.IsDefault
             };
         }
     }

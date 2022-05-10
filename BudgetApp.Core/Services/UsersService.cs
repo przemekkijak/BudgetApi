@@ -9,10 +9,12 @@ namespace BudgetApp.Core.Services
     public class UsersService : IUsersService
     {
         private readonly IUsersRepository _usersRepository;
+        private readonly IBudgetService _budgetService;
 
-        public UsersService(IUsersRepository usersRepository)
+        public UsersService(IUsersRepository usersRepository, IBudgetService budgetService)
         {
             _usersRepository = usersRepository;
+            _budgetService = budgetService;
         }
 
         public async Task<UserModel?> GetUserById(int id)
@@ -55,12 +57,11 @@ namespace BudgetApp.Core.Services
             await _usersRepository.CreateAsync(model);
 
             var createdUser = await _usersRepository.GetByEmail(model.Email);
-            if (createdUser != null)
-            {
-                return new ExecutionResult<UserModel?>(ModelFactory.Create(createdUser));
-            }
-
-            return new ExecutionResult<UserModel?>(new ErrorInfo(ErrorCodes.RegisterError, "Couldn't create user"));
+            if (createdUser == null)
+                return new ExecutionResult<UserModel?>(new ErrorInfo(ErrorCodes.RegisterError, "Couldn't create user"));
+            
+            await _budgetService.CreateBudget(createdUser.Id, "Default", true);
+            return new ExecutionResult<UserModel?>(ModelFactory.Create(createdUser));
         }
     }
 }
