@@ -17,7 +17,9 @@ namespace BudgetApp.Database
         {
             modelBuilder.Entity<BudgetEntity>()
                 .HasMany(a => a.Transactions)
-                .WithOne(a => a.Budget);
+                .WithOne(a => a.Budget)
+                .IsRequired();
+            
             modelBuilder.Entity<BudgetEntity>().HasIndex(a => new { a.UserId, a.Name }).IsUnique();
             modelBuilder.Entity<BudgetEntity>().Property(a => a.IsDefault).IsRequired();
 

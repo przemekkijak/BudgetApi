@@ -26,5 +26,18 @@ namespace BudgetApp.Domain.Models
                 IsDefault = entity.IsDefault
             };
         }
+
+        public static TransactionModel Create(TransactionEntity entity)
+        {
+            return new TransactionModel()
+            {
+                UserId = entity.UserId,
+                BudgetId = entity.BudgetId,
+                Amount = entity.Amount,
+                Description = entity.Description,
+                IsPaid = entity.IsPaid,
+                PaymentDate = entity.PaymentDate
+            };
+        }
     }
 }
